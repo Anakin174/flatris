@@ -9,5 +9,7 @@ before_script:
 
 build:
   script:
-    - docker build --tag registry.gitlab.com/Anakin174/flatris .
-    - docker push registry.gitlab.com/Anakin174/flatris
+    - docker pull registry.gitlab.com/Anakin174/flatris:latest
+    - docker build --cache-from registry.gitlab.com/Anakin174/flatris:latest --tag registry.gitlab.com/Anakin174/flatris:latest --tag "registry.gitlab.com/Anakin174/flatris:$CI_COMMIT_SHA" .
+    - docker push registry.gitlab.com/Anakin174/flatris:latest
+    - docker push "registry.gitlab.com/Anakin174/flatris:$CI_COMMIT_SHA"
