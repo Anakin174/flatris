@@ -12,4 +12,4 @@ build:
     - docker pull registry.gitlab.com/anakin174/flatris:latest
     - docker build --cache-from registry.gitlab.com/anakin174/flatris:latest --tag registry.gitlab.com/anakin174/flatris:latest --tag "registry.gitlab.com/anakin174/flatris:$CI_COMMIT_SHA" .
     - docker push registry.gitlab.com/anakin174/flatris:latest
-    - docker push "registry.gitlab.com/anakin174/latest:$CI_COMMIT_SHA"
+    - docker push "registry.gitlab.com/anakin174/flatris:$CI_COMMIT_SHA"
