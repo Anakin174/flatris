@@ -6,7 +6,6 @@ services:
 stages:
   - build
   - test
-  - start
 
 before_script:
  - export
@@ -25,9 +24,3 @@ test:
   script:
     - docker pull registry.gitlab.com/anakin174/flatris:latest
     - docker run registry.gitlab.com/anakin174/flatris:latest yarn test
-
-start:
-  stage: start
-  script:
-    - docker pull registry.gitlab.com/anakin174/flatris:latest
-    - docker run registry.gitlab.com/anakin174/flatris:latest yarn start
