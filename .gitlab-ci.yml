@@ -3,13 +3,24 @@ image: docker
 services:
 - docker:dind
 
+stages:
+  - build
+  - test
+
 before_script:
  - export
  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com
 
 build:
+  stage: build
   script:
     - docker pull registry.gitlab.com/anakin174/flatris:latest
     - docker build --cache-from registry.gitlab.com/anakin174/flatris:latest --tag registry.gitlab.com/anakin174/flatris:latest --tag "registry.gitlab.com/anakin174/flatris:$CI_COMMIT_SHA" .
     - docker push registry.gitlab.com/anakin174/flatris:latest
     - docker push "registry.gitlab.com/anakin174/flatris:$CI_COMMIT_SHA"
+
+test:
+  stage: test
+  script:
+    - docker pull registry.gitlab.com/anakin174/flatris:latest
+    - docker run registry.gitlab.com/anakin174/flatris:latest yarn test
