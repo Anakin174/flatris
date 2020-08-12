@@ -46,7 +46,7 @@ test_yarn:
 
 test_npm:
   stage: test_npm
-    dependencies:
-      - npm
-    script:
-      - npm test
+  dependencies:
+    - npm
+  script:
+    - npm test
