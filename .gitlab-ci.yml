@@ -5,9 +5,7 @@ services:
 
 stages:
   - build
-  - npm_install
-  - test_yarn
-  - test_npm
+  - test
 
 before_script:
  - export
@@ -21,31 +19,8 @@ build:
     - docker push registry.gitlab.com/anakin174/flatris:latest
     - docker push "registry.gitlab.com/anakin174/flatris:$CI_COMMIT_SHA"
 
-test_yarn:
-  stage: test_yarn
+test:
+  stage: test
   script:
     - docker pull registry.gitlab.com/anakin174/flatris:latest
     - docker run registry.gitlab.com/anakin174/flatris:latest yarn test
-
-
-npm_install:
-  image: node:8.9.4
-  stage: npm_install
-  script:
-    - npm config set registry ${CI_NPM_REGISTRY}
-    - npm install
-  cache:
-    paths:
-      - node_modules/
-  artifacts:
-    expire_in: 1 days
-    when: on_success
-    paths:
-      - node_modules/
-
-test_npm:
-  stage: test_npm
-  dependencies:
-    - npm_install
-  script:
-    - npm test
