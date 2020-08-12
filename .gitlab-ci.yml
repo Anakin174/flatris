@@ -27,8 +27,9 @@ test_yarn:
     - docker pull registry.gitlab.com/anakin174/flatris:latest
     - docker run registry.gitlab.com/anakin174/flatris:latest yarn test
 
-image: node:8.9.4
+
 npm_install:
+  image: node:8.9.4
   stage: npm_install
   script:
     - npm config set registry ${CI_NPM_REGISTRY}
