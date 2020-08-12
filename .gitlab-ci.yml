@@ -47,6 +47,6 @@ test_yarn:
 test_npm:
   stage: test_npm
   dependencies:
-    - npm
+    - npm_install
   script:
     - npm test
